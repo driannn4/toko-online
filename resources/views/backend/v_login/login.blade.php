@@ -53,7 +53,7 @@
                     </div>
                     @endif
                     <!-- errorEnd -->
-                    <form class="form-horizontal m-t-20" id="loginform" action="{{route('backend.login') }}" method="post">
+                    <form class="form-horizontal m-t-20" id="loginform" action="{{ route('backend.login.authenticate') }}" method="post">
                         @csrf
                         <div class="row p-b-30">
                             <div class="col-12">

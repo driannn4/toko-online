@@ -49,7 +49,7 @@ class CustomerController extends Controller
  
                 // Buat data customer 
                 Customer::create([ 
-                    'user_id' => $user->id, 
+                    'user_id' => $user->id,   
                     'google_id' => $socialUser->id, 
                     'google_token' => $socialUser->token 
                 ]); 

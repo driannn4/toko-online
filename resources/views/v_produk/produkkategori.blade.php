@@ -1,4 +1,5 @@
 @extends('v_layouts.app')
+
 @section('content')
 <!-- template -->
 
@@ -20,22 +21,26 @@
                     <a href="{{ route('produk.detail', $row->id) }}">
                         <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Detail Produk</button>
                     </a>
-                    <img src="{{ asset('storage/img-produk/thumb_md_' . $row->foto) }}" alt="">
+                    <!-- Pastikan gambar benar-benar ada -->
+                    <img src="{{ asset('storage/img-produk/thumb_md_' . $row->foto) }}" alt="{{ $row->nama_produk }}">
                 </div>
                 <div class="product-body">
-                    <h3 class="product-price"> Rp. {{ number_format($row->harga, 0, ',', '.') }} <span
-                            class="product-old-price">{{ $row->kategori->nama_kategori }}</span></h3>
+                    <h3 class="product-price">
+                        Rp. {{ number_format($row->harga, 0, ',', '.') }} 
+                        <span class="product-old-price">{{ $row->kategori->nama_kategori }}</span>
+                    </h3>
 
-                    <h2 class="product-name"><a href="#">{{ $row->nama_produk }}</a></h2>
+                    <h2 class="product-name"><a href="{{ route('produk.detail', $row->id) }}">{{ $row->nama_produk }}</a></h2>
                     <div class="product-btns">
                         <a href="{{ route('produk.detail', $row->id) }}" title="Detail Produk">
                             <button class="main-btn icon-btn"><i class="fa fa-search-plus"></i></button>
                         </a>
-                        <form action="3" method="post"
-                            style="display: inline-block;" title="Pesan Ke Aplikasi">
+                        <!-- Pastikan action form mengarah ke route yang benar -->
+                        <form action="{{ route('produk.pesan', $row->id) }}" method="post" style="display: inline-block;" title="Pesan Ke Aplikasi">
                             @csrf
-                            <button type="submit" class="primary-btn add-to-cart"><i
-                                    class="fa fa-shopping-cart"></i> Pesan</button>
+                            <button type="submit" class="primary-btn add-to-cart">
+                                <i class="fa fa-shopping-cart"></i> Pesan
+                            </button>
                         </form>
                     </div>
                 </div>

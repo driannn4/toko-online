@@ -24,8 +24,10 @@ class BerandaController extends Controller
         // dd(Auth::check(), Auth::user());
 
         return view('v_beranda.index', [
-            'judul' => 'Halan Beranda',
+            'judul' => 'Halaman Beranda',
             'produk' => $produk,
         ]);
     }
+
+    
 }

@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Console\\Commands\\SyncTime' => $baseDir . '/app/Console/Commands/SyncTime.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Helpers\\ImageHelper' => $baseDir . '/app/Helpers/ImageHelper.php',
@@ -30,6 +31,7 @@ return array(
     'App\\Models\\FotoProduk' => $baseDir . '/app/Models/FotoProduk.php',
     'App\\Models\\Kategori' => $baseDir . '/app/Models/Kategori.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
+    'App\\Models\\produk' => $baseDir . '/app/Models/produk.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

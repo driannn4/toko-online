@@ -8,61 +8,68 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\CustomerController;
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
 */
 
-Route::get('/', function () {
-    // return view('welcome');
-    return redirect()->route('beranda');
-});
-// Frontend 
-Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda'); 
+// 🔁 Redirect halaman utama ke beranda frontend
+Route::get('/', fn() => redirect()->route('beranda'));
 
-// backend 
-Route::get('backend/beranda', [BerandaController::class, 'berandaBackend'])->name('backend.beranda');
+// 🌐 Beranda Frontend
+Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda');
+
+// 🔐 Backend Routes (Login Admin dibutuhkan)
+Route::middleware(['auth'])->prefix('backend')->name('backend.')->group(function () {
+    // 📊 Dashboard Backend
+    Route::get('/beranda', [BerandaController::class, 'berandaBackend'])->name('beranda');
+
+    // 🧑‍💼 Manajemen User
+    Route::resource('user', UserController::class);
+
+    // 🗂️ Manajemen Kategori
+    Route::resource('kategori', KategoriController::class);
+
+    // 🛒 Manajemen Produk
+    Route::resource('produk', ProdukController::class);
+
+    // 📷 Foto Produk
+    Route::post('foto-produk/store', [ProdukController::class, 'storeFoto'])->name('foto_produk.store');
+    Route::delete('foto-produk/{id}', [ProdukController::class, 'destroyFoto'])->name('foto_produk.destroy');
+
+    // 🧾 Laporan Produk
+    Route::get('laporan/formproduk', [ProdukController::class, 'formProduk'])->name('laporan.formproduk');
+    Route::post('laporan/cetakproduk', [ProdukController::class, 'cetakProduk'])->name('laporan.cetakproduk');
+
+    // 🧾 Laporan User
+    Route::get('laporan/formuser', [UserController::class, 'formUser'])->name('laporan.formuser');
+    Route::post('laporan/cetakuser', [UserController::class, 'cetakUser'])->name('laporan.cetakuser');
+
+    // 👥 Manajemen Customer
+    Route::resource('customer', CustomerController::class);
+});
+
+// 🔑 Login Admin
 Route::get('backend/login', [LoginController::class, 'loginBackend'])->name('backend.login');
 Route::post('backend/login', [LoginController::class, 'authenticateBackend'])->name('backend.login.authenticate');
 Route::post('backend/logout', [LoginController::class, 'logoutBackend'])->name('backend.logout');
 
-// Route::resource('backend/user', UserController::class)->middleware('auth');
-Route::resource('/backend/user', UserController::class, ['as' => 'backend'])->middleware('auth');
-// Route::resource('backend/user', UserController::class)->middleware('auth');
-
-Route::resource('backend/kategori', KategoriController::class, ['as' => 'backend'])->middleware('auth');
-Route::resource('backend/produk', ProdukController::class, ['as' => 'backend'])->middleware('auth');
-// Route untuk menambahkan foto
-Route::post('foto-produk/store', [ProdukController::class, 'storeFoto'])->name('backend.foto_produk.store')->middleware('auth');
-// Route untuk menghapus foto
-Route::delete('foto-produk/{id}', [ProdukController::class, 'destroyFoto'])->name('backend.foto_produk.destroy')->middleware('auth');
-Route::get('backend/laporan/formuser', [UserController::class, 'formUser'])->name('backend.laporan.formuser')->middleware('auth');
-Route::post('backend/laporan/cetakuser', [UserController::class, 'cetakUser'])->name('backend.laporan.cetakuser')->middleware('auth');
-
-Route::get('backend/laporan/formproduk', [ProdukController::class, 'formProduk'])->name('backend.laporan.formproduk')->middleware('auth');
-Route::post('backend/laporan/cetakproduk', [ProdukController::class, 'cetakProduk'])->name('backend.laporan.cetakproduk')->middleware('auth');
-
-Route::middleware(['web'])->group(function () {
-    // Frontend 
-    Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda'); 
-    Route::get('/produk/detail/{id}', [ProdukController::class, 'detail'])->name('produk.detail');
-    Route::get('/produk/kategori/{id}', [ProdukController::class, 'produkKategori'])->name('produk.kategori');
-    Route::get('/produk/all', [ProdukController::class, 'produkAll'])->name('produk.all');
-});
-
+// 🔐 Login via Google (Customer)
 //API Google
 Route::get('/auth/redirect', [CustomerController::class, 'redirect'])->name('auth.redirect');
 Route::get('/auth/google/callback', [CustomerController::class, 'callback'])->name('auth.callback');
 // Logout
-Route::post('/logout', [CustomerController::class, 'logout'])->name('customer.logout');
+Route::post('/logout', [CustomerController::class, 'logout'])->name('logout');
+Route::post('/logout-customer', [CustomerController::class, 'logout'])->name('customer.logout');
 
-// Route untuk Customer
-Route::resource('backend/customer', CustomerController::class, ['as' => 'backend'])->middleware('auth');
+
+// 🚪 Logout Customer
+Route::post('/logout-customer', [CustomerController::class, 'logout'])->name('customer.logout');
+
+// 🛍️ Produk Frontend
+Route::middleware(['web'])->group(function () {
+    Route::get('/produk/detail/{id}', [ProdukController::class, 'detail'])->name('produk.detail');
+    Route::get('/produk/kategori/{id}', [ProdukController::class, 'produkKategori'])->name('produk.kategori');
+    Route::get('/produk/all', [ProdukController::class, 'produkAll'])->name('produk.all');
+});
