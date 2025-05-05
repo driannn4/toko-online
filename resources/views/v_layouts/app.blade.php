@@ -59,35 +59,52 @@
                             <strong class="text-uppercase">Keranjang</strong>
                         </a>
                     </li>
-<!-- Account -->
+
+@if (Auth::check())
+<!-- Account (Saat user login) -->
 <li class="header-account dropdown default-dropdown">
     <div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
         <div class="header-btns-icon">
             <i class="fa fa-user-o"></i>
         </div>
-        <strong class="text-uppercase">Akun Saya <i class="fa fa-caret-down"></i></strong>
+        <strong class="text-uppercase">
+            {{ Auth::user()->nama }} <i class="fa fa-caret-down"></i>
+        </strong>
     </div>
-
     <ul class="custom-menu">
-        @auth
-            <!-- Menampilkan Nama Pengguna yang Sedang Login -->
-            <li><a href="#"><i class="fa fa-user-o"></i> {{ Auth::user()->nama }}</a></li>
-            <li><a href="#"><i class="fa fa-envelope"></i> {{ Auth::user()->email }}</a></li>
-            <li><a href="{{ route('customer.logout') }}"><i class="fa fa-sign-out"></i> Logout</a></li>
-        @else
-            <!-- Menampilkan Login jika Pengguna Belum Login -->
-            <li><a href="{{ route('auth.redirect') }}"><i class="fa fa-google"></i> Login dengan Google</a></li>
-        @endauth
+        <li>
+            <a href="#"><i class="fa fa-user-o"></i> Akun Saya</a>
+        </li>
+        <li>
+            <a href="#"><i class="fa fa-check"></i> History</a>
+        </li>
+        <li>
+            <a href="#" onclick="event.preventDefault(); document.getElementById('keluar-app').submit();">
+                <i class="fa fa-power-off"></i> Keluar
+            </a>
 
-        <li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
-        <li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
-        <li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
-
-        {{-- Registrasi akun bisa diarahkan ke halaman form jika kamu buat nanti --}}
-        <li><a href="#"><i class="fa fa-user-plus"></i> Create An Account</a></li>
+            <!-- Form logout -->
+            <form id="keluar-app" action="{{ route('customer.logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+            <!-- /Form logout -->
+        </li>
     </ul>
 </li>
-
+@else
+<!-- Account (Saat user belum login) -->
+<li class="header-account dropdown default-dropdown">
+    <div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
+        <div class="header-btns-icon">
+            <i class="fa fa-user-o"></i>
+        </div>
+        <strong class="text-uppercase">
+            Akun Saya <i class="fa fa-caret-down"></i>
+        </strong>
+    </div>
+    <a href="{{ route('auth.redirect') }}" class="text-uppercase">Login</a>
+</li>
+@endif
 
         {{-- Logout customer jika sudah login --}}
         @auth
