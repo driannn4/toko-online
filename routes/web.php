@@ -73,3 +73,16 @@ Route::middleware(['web'])->group(function () {
     Route::get('/produk/kategori/{id}', [ProdukController::class, 'produkKategori'])->name('produk.kategori');
     Route::get('/produk/all', [ProdukController::class, 'produkAll'])->name('produk.all');
 });
+
+
+// Group route untuk customer
+Route::middleware('is.customer')->group(function () {
+    // Menampilkan halaman akun customer
+    Route::get('/customer/akun/{id}', [CustomerController::class, 'akun'])
+        ->name('customer.akun');
+
+    // Mengupdate data akun customer
+    Route::put('/customer/updateakun/{id}', [CustomerController::class, 'updateAkun'])
+        ->name('customer.updateakun');
+});
+
