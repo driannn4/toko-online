@@ -35,10 +35,14 @@
                             <button class="main-btn icon-btn"><i class="fa fa-search-plus"></i></button>
                         </a>
 
-                        <form action="3" method="post" style="display: inline-block;" title="Pesan Ke Aplikasi">
-                            @csrf
-                            <button type="submit" class="primary-btn add-to-cart">
-                                <i class="fa fa-shopping-cart"></i> Pesan
+                        <!-- Form untuk menambahkan produk ke keranjang -->
+                        <form action="{{ route('order.addToCart', $row->id) }}" method="post" style="display: inline-block;" title="Pesan Ke Aplikasi">
+                         @csrf
+                        <button type="submit" class="primary-btn add-to-cart">
+                       <i class="fa fa-shopping-cart"></i> Pesan
+                        </button>
+                        </form>
+
                             </button>
                         </form>
                     </div>

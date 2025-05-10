@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,13 +57,11 @@ Route::post('backend/login', [LoginController::class, 'authenticateBackend'])->n
 Route::post('backend/logout', [LoginController::class, 'logoutBackend'])->name('backend.logout');
 
 // 🔐 Login via Google (Customer)
-//API Google
+// API Google
 Route::get('/auth/redirect', [CustomerController::class, 'redirect'])->name('auth.redirect');
 Route::get('/auth/google/callback', [CustomerController::class, 'callback'])->name('auth.callback');
 // Logout
 Route::post('/logout', [CustomerController::class, 'logout'])->name('logout');
-Route::post('/logout-customer', [CustomerController::class, 'logout'])->name('customer.logout');
-
 
 // 🚪 Logout Customer
 Route::post('/logout-customer', [CustomerController::class, 'logout'])->name('customer.logout');
@@ -74,15 +73,17 @@ Route::middleware(['web'])->group(function () {
     Route::get('/produk/all', [ProdukController::class, 'produkAll'])->name('produk.all');
 });
 
-
 // Group route untuk customer
 Route::middleware('is.customer')->group(function () {
-    // Menampilkan halaman akun customer
-    Route::get('/customer/akun/{id}', [CustomerController::class, 'akun'])
-        ->name('customer.akun');
+    // 👤 Menampilkan halaman akun customer
+    Route::get('/customer/akun/{id}', [CustomerController::class, 'akun'])->name('customer.akun');
 
-    // Mengupdate data akun customer
-    Route::put('/customer/updateakun/{id}', [CustomerController::class, 'updateAkun'])
-        ->name('customer.updateakun');
+    // ✏️ Mengupdate data akun customer
+    Route::put('/customer/updateakun/{id}', [CustomerController::class, 'updateAkun'])->name('customer.updateakun');
+
+    // 🛒 Menambahkan produk ke keranjang
+    Route::post('add-to-cart/{id}', [OrderController::class, 'addToCart'])->name('order.addToCart');
+
+    // 🧺 Menampilkan isi keranjang belanja
+    Route::get('cart', [OrderController::class, 'viewCart'])->name('order.cart');
 });
-
