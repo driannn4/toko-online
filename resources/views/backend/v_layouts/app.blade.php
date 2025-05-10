@@ -9,9 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('image/icon_univ_bsi.png') }}">
-    <title>tokoonline</title>
-
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontend/image/icon_univ_bsi.png') }}">
+    <title>Toko Online</title>
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/extra-libs/multicheck/multicheck.css') }}">
     <link href="{{ asset('backend/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
@@ -33,6 +32,7 @@
             <div class="lds-pos"></div>
             <div class="lds-pos"></div>
         </div>
+
     </div>
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
@@ -55,14 +55,14 @@
                         <b class="logo-icon p-l-10">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="{{ asset('image/icon_univ_bsi.png') }}"
+                            <img src="{{ asset('frontend/image/icon_univ_bsi.png') }}"
                                 alt="homepage" class="light-logo" />
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span class="logo-text">
                             <!-- dark Logo text -->
-                            <img src="{{ asset('image/logo_text.png') }}" alt="homepage"
+                            <img src="{{ asset('frontend/image/logo_text.png') }}" alt="homepage"
                                 class="light-logo" />
                         </span>
                         <!-- Logo icon -->
@@ -70,7 +70,6 @@
                         <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                         <!-- Dark Logo icon -->
                         <!-- <img src="assets/images/logo-text.png" alt="homepage" class="light-logo" /> -->
-
                         <!-- </b> -->
                         <!--End Logo icon -->
                     </a>
@@ -92,6 +91,7 @@
                     <!-- toggle and nav items -->
                     <!-- ============================================================== -->
                     <ul class="navbar-nav float-left mr-auto">
+
                         <li class="nav-item d-none d-md-block"><a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a></li>
                         <!-- ============================================================== -->
                         <!-- create new -->
@@ -116,7 +116,6 @@
                         <!-- ============================================================== -->
                         <!-- End Messages -->
                         <!-- ============================================================== -->
-
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
@@ -130,7 +129,9 @@
                                 @endif
                             </a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                                <a class="dropdown-item" href="{{ route('backend.user.edit', Auth::user()->id) }}"><i class="ti-user m-r-5 m-l-5"></i> Profil Saya</a>
+                                <a class="dropdown-item" href="{{ route('backend.user.edit', Auth::user()->id) }}"><i class="ti-user m-r-5 m-l-5"></i> Profil
+                                    Saya</a>
+
                                 <a class="dropdown-item" href=""
                                     onclick="event.preventDefault(); document.getElementById('keluar-app').submit();"><i
                                         class="fa fa-power-off m-r-5 m-l-5"></i> Keluar</a>
@@ -162,21 +163,25 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('backend.user.index') }}" aria-expanded="false"><i
                                     class="mdi mdi-account"></i><span class="hide-menu">User</span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdishopping"></i><span class="hide-menu">Data Produk </span></a>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('backend.customer.index') }}" aria-expanded="false"><i class="mdi mdi-account-multiple"></i>
+                        <span class="hide-menu">Customer</span></a> </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-shopping"></i><span class="hide-menu">Data Produk </span></a>
                             <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item"><a href="{{ route('backend.kategori.index') }}"
-                                        class="sidebar-link"><i class="mdi mdi-chevron-right"></i><span class="hide-menu"> Kategori
-                                        </span></a>
+                                <li class="sidebar-item"><a href="{{ route('backend.kategori.index') }}" class="sidebar-link"><i class="mdi mdi-chevron-right"></i><span class="hide-menu"> Kategori </span></a>
                                 </li>
-
-                                <li class="sidebar-item"><a href="icon-fontawesome.html"
-                                        class="sidebar-link"><i class="mdi mdi-chevron-right"></i><span class="hide-menu"> Produk
-                                        </span></a>
+                                <li class="sidebar-item"><a href="{{ route('backend.produk.index') }}" class="sidebar-link"><i class="mdi mdi-chevron-right"></i><span class="hide-menu"> Produk </span></a>
                                 </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Laporan </span></a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item"><a href="{{ route('backend.laporan.formuser') }}" class="sidebar-link"><i class="mdi mdi-chevron-right"></i><span class="hide-menu"> User </span></a></li>
+                                <li class="sidebar-item"><a href="{{ route('backend.laporan.formproduk') }}" class="sidebar-link"><i class="mdi mdi-chevron-right"></i><span class="hide-menu"> Produk </span></a></li>
                             </ul>
                         </li>
                     </ul>
                 </nav>
+
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
@@ -231,7 +236,6 @@
         </div>
         <!-- ============================================================== -->
         <!-- End Page wrapper -->
-
         <!-- ============================================================== -->
     </div>
     <!-- ============================================================== -->
@@ -241,6 +245,7 @@
     <!-- All Jquery -->
     <!-- ============================================================== -->
     <script src="{{asset ('backend/assets/libs/jquery/dist/jquery.min.js') }}"></script>
+
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{asset ('backend/assets/libs/popper.js/dist/umd/popper.min.js') }}"></script>
     <script src="{{asset ('backend/assets/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
@@ -248,28 +253,26 @@
     <script src="{{asset ('backend/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js') }}"></script>
     <script src="{{asset ('backend/assets/extra-libs/sparkline/sparkline.js') }}"></script>
     <!--Wave Effects -->
-    <script src="{{asset ('backend/dist/js/waves.js') }}"></script>
+    <script src="{{ asset('backend/dist/js/waves.js') }}"></script>
     <!--Menu sidebar -->
-    <script src="{{asset ('backend/dist/js/sidebarmenu.js') }}"></script>
+    <script src="{{ asset('backend/dist/js/sidebarmenu.js') }}"></script>
     <!--Custom JavaScript -->
-    <script src="{{asset ('backend/dist/js/custom.min.js') }}"></script>
+    <script src="{{ asset('backend/dist/js/custom.min.js') }}"></script>
     <!-- this page js -->
     <script src="{{asset ('backend/assets/extra-libs/multicheck/datatable-checkbox-init.js') }}"></script>
     <script src="{{asset ('backend/assets/extra-libs/multicheck/jquery.multicheck.js') }}"></script>
     <script src="{{asset ('backend/assets/extra-libs/DataTables/datatables.min.js') }}"></script>
     <script>
         /****************************************
-         *       Basic Table                   *
+         * Basic Table *
          ****************************************/
         $('#zero_config').DataTable();
     </script>
-
     <!-- form keluar app -->
     <form id="keluar-app" action="{{ route('backend.logout') }}" method="POST" class="d-none">
         @csrf
     </form>
     <!-- form keluar app end -->
-
     <!-- sweetalert -->
     <script src="{{ asset('sweetalert/sweetalert2.all.min.js') }}"></script>
     <!-- sweetalert End -->
@@ -308,6 +311,29 @@
                 }
             });
         });
+    </script>
+    <script>
+        // previewFoto
+        function previewFoto() {
+            const foto = document.querySelector('input[name="foto"]');
+            const fotoPreview = document.querySelector('.foto-preview');
+            fotoPreview.style.display = 'block';
+            const fotoReader = new FileReader();
+            fotoReader.readAsDataURL(foto.files[0]);
+            fotoReader.onload = function(fotoEvent) {
+                fotoPreview.src = fotoEvent.target.result;
+                fotoPreview.style.width = '100%';
+            }
+        }
+    </script>
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script> -->
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#ckeditor'))
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 </body>
 

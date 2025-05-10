@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Cross-Origin Resource Sharing (CORS) Configuration
@@ -15,11 +14,14 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie', 'auth/*'],  // Menambahkan auth/* untuk login Google
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => [
+        'http://127.0.0.1:8000',   // Mengizinkan akses dari localhost
+        'http://localhost:8000',   // Mengizinkan akses dari localhost
+    ],
 
     'allowed_origins_patterns' => [],
 
@@ -29,6 +31,7 @@ return [
 
     'max_age' => 0,
 
-    'supports_credentials' => false,
-
+    'supports_credentials' => true,  // Mendukung credentials seperti cookies
 ];
+
+
